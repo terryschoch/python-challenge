@@ -3,107 +3,52 @@ import os
 import csv
 # set path to to the csv:
 election_csv = os.path.join('/Users/terryschoch/Desktop/Data_Analytics/python-challenge/Resources/election_data.csv')
-
+# create lists to store total votes_cast and candidates who received votes
 votes_cast = []
 candidates = []
-
-#Open the file, Specify the variable to hold the contents & account for header
+# open file, specify variable to hold the contents of file & account for header
 with open(election_csv) as csvfile:
     reader = csv.reader(csvfile, delimiter=',')
     csv_header = next(reader) 
-    # loop for and votes_cast and candidates to lists
+    # loop for and append votes_cast and candidates to respective lists
     for row in reader:
         votes_cast.append(row[0])
-        candidates.append(row[2])
-    
-# create a list of the three candidates
+        candidates.append(row[2]) 
+# identify the unique candidate names and add to indexed list
 candidate_list = list(set(candidates))
-
-# should for loop through the candidate list index and find the vote shares for each
-# i = 0
-# for i in candidate_list:
-#     vote_percentage = round((candidates.count(i)/(len(candidates))*100), 3)
-#     print(vote_percentage)
-
-
-
-# Print summaries: Header, total number of votes cast,
+# print Header and Total votes_cast
 print('Election Results')
 print('-' * 30)
 print('Total Votes: ' + str(len(votes_cast)))
 print("-" * 30)
-# print(f'{candidate_list[0]}: {round(((candidates.count(candidate_list[0])/(len(candidates)))*100), 3)}% ({(candidates.count(candidate_list[0]))})') 
-# print(f'{candidate_list[1]}: {round(((candidates.count(candidate_list[1])/(len(candidates)))*100), 3)}% ({(candidates.count(candidate_list[1]))})')
-# print(f'{candidate_list[2]}: {round(((candidates.count(candidate_list[2])/(len(candidates)))*100), 3)}% ({(candidates.count(candidate_list[2]))})')
-# should for loop through the candidate list index and find the vote shares for each
-i = 0
+# create lists to store vote_results as well as vote_share percentage and total votes_earned per candidate
+vote_results = []
+vote_share = []
+votes_earned = []
+# create a function to append vote_share and votes_earned lists with respective results then:  
+# find candidate name from candidate_list, their vote_share from share_percentage and their total votes_earned from candidates.count
+# run function through a loop
+def main():
+    share_percentage = "{}%".format(round((candidates.count(i)/(len(candidates))*100), 3))
+    vote_share.append(share_percentage)
+    votes_earned.append("({})".format(candidates.count(i)))
+    print(str(i) + ": " + str(share_percentage) + " (" + str(candidates.count(i)) + ")")
+    return (str(i) + ": " + str(share_percentage) + " (" + str(candidates.count(i)) + ")")
 for i in candidate_list:
-    vote_percentage = round((candidates.count(i)/(len(candidates))*100), 3)
-    print(str(i) + ": " + str(vote_percentage) + "% (" + str(candidates.count(i)) + ")")
-
-# print(f'{candidate_list[0]}: {round(((candidates.count(candidate_list[0])/(len(candidates)))*100), 3)}% ({(candidates.count(candidate_list[0]))})') 
-# print(f'{candidate_list[1]}: {round(((candidates.count(candidate_list[1])/(len(candidates)))*100), 3)}% ({(candidates.count(candidate_list[1]))})')
-# print(f'{candidate_list[2]}: {round(((candidates.count(candidate_list[2])/(len(candidates)))*100), 3)}% ({(candidates.count(candidate_list[2]))})')
+    vote_results.append(main())
+# find index of the winning vote share
+winning_share = vote_share.index(max(vote_share))
+# print Winner
 print("-" * 30)
-print(f'Winner: ')
+print(f'Winner: {candidate_list[winning_share]}')
+print("-" * 30)
 
-# # Specify the file to write to
-# election_results = os.path.join('/Users/terryschoch/Desktop/Data_Analytics/python-challenge/PyPoll/election_results.txt')
-
-# # # Open the file using "write" mode. Specify the variable to hold the contents
-# # with open(election_results, 'w') as datafile:
-# #     # Initialize csv.writer
-# #     writer = csv.writer(datafile)
-# #     # Write the first row (column headers)
-# #     writer.writerow('Election Results')
-# #     writer.writerow('-' * 30)
-# #     # Write the rest
-# #     writer.writerows(candidate_list)
-
-
-# candidate_list = set(candidates)
-# choices = list(candidate_list)
-
-# for candidate in candidate_list:
-#      print(candidate)
-# print(candidate_list[0])
-
-# index = (choices.index(candidates[0]))
-# print(index)
-
-# print(candidates.count(choices[0]))
-# print(candidates.count(choices[1]))
-# print(candidates.count(choices[2]))
-
-
-
-# from collections import Counter
-# candidate_votes = Counter(candidates)
-# print(candidate_votes)
-# new = (sum(candidate_votes))
-# print(new)
-
-# for i, v in enumerate(candidate_votes):
-#     if i == 0:
-#         print(v)
-# split_place = candidate_votes[1]/1
-# print(split_place)
-
-
-# votepercent = (candidates.count(candidate_list[0])/(len(candidates)))
-# x = round((votepercent*100), 2)
-# print(round((votepercent*100), 3))
-
-
-# candidate_list = set(candidates)
-# for candidate in candidate_list:
-#     print(candidate)
-
-
-
-# average_change = round(sum(changes)/(len(changes) - 1), 2)
-# print("Average Change: $" + str(average_change))
-# # determine max increase, its index and corresponding months; repeat for decrease - print results
-# grincrease = max(newprofit_loss)
-# increase_index = newprofit_loss.index(grincrease)
-# grincrease_month = months[increase_index]
+# -------------------------------------------
+# Specify the file to write to
+election_results = os.path.join('/Users/terryschoch/Desktop/Data_Analytics/python-challenge/PyPoll/election_results4.txt')
+# Open the file using "write" mode. Specify variable to hold the text and results to be written and run for loop to write
+words = ["Election Results", "-" * 30, "Total Votes: " + str(len(votes_cast)), "-" * 30, "\n".join(str(item) for item in vote_results), "-" * 30, "Winner: " + str(candidate_list[winning_share]), "-" * 30]
+with open('election_results.txt', 'w') as f:
+    for word in words:
+        f.write(word + ("\n"))        
+    f.close
