@@ -2,7 +2,7 @@
 import os
 import csv
 # set path to to the csv:
-budget_csv = os.path.join('/Users/terryschoch/Desktop/Data_Analytics/python-challenge/Resources/budget_data.csv')
+budget_csv = os.path.join('Resources', 'budget_data.csv')
 # create lists to store read info of total months, profit_loss and profit_loss2
 months = []
 profit_loss = []
@@ -48,11 +48,10 @@ grdecrease = biggest_change(min, "Decrease")
 
 # -------------------------------------------
 # Specify the file to write to
-financial_analysis = os.path.join('/Users/terryschoch/Desktop/Data_Analytics/python-challenge/PyBank/financial_analysis.txt')
-# Open the file using "write" mode. Specify variable to hold the text and results to be written and run for loop to write
+financial_analysis = os.path.join('Analysis', 'financial_analysis.txt')
+# Open the file using "write" mode. Specify variable to hold the text and results to be written and run for loop to write then close
 words = ["Financial Analysis", "-" * 30, "Total Months: " + str(len(months)), "Total: $" + str(sum(newprofit_loss)), "Average Change: $" + str(average_change), str(grincrease), str(grdecrease)]
-# write with loop and close
-with open('financial_analysis.txt', 'w') as f:
+with open(financial_analysis, 'w') as f:
     for word in words:
         f.write(word + ("\n"))        
     f.close

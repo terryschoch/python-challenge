@@ -2,7 +2,7 @@
 import os
 import csv
 # set path to to the csv:
-election_csv = os.path.join('/Users/terryschoch/Desktop/Data_Analytics/python-challenge/Resources/election_data.csv')
+election_csv = os.path.join('Resources', 'election_data.csv')
 # create lists to store total votes_cast and candidates who received votes
 votes_cast = []
 candidates = []
@@ -28,14 +28,14 @@ votes_earned = []
 # create a function to append vote_share and votes_earned lists with respective results then:  
 # find candidate name from candidate_list, their vote_share from share_percentage and their total votes_earned from candidates.count
 # run function through a loop
-def main():
+def results():
     share_percentage = "{}%".format(round((candidates.count(i)/(len(candidates))*100), 3))
     vote_share.append(share_percentage)
     votes_earned.append("({})".format(candidates.count(i)))
     print(str(i) + ": " + str(share_percentage) + " (" + str(candidates.count(i)) + ")")
     return (str(i) + ": " + str(share_percentage) + " (" + str(candidates.count(i)) + ")")
 for i in candidate_list:
-    vote_results.append(main())
+    vote_results.append(results())
 # find index of the winning vote share
 winning_share = vote_share.index(max(vote_share))
 # print Winner
@@ -45,10 +45,10 @@ print("-" * 30)
 
 # -------------------------------------------
 # Specify the file to write to
-election_results = os.path.join('/Users/terryschoch/Desktop/Data_Analytics/python-challenge/PyPoll/election_results4.txt')
+election_results = os.path.join('Analysis', 'election_results.txt')
 # Open the file using "write" mode. Specify variable to hold the text and results to be written and run for loop to write
 words = ["Election Results", "-" * 30, "Total Votes: " + str(len(votes_cast)), "-" * 30, "\n".join(str(item) for item in vote_results), "-" * 30, "Winner: " + str(candidate_list[winning_share]), "-" * 30]
-with open('election_results.txt', 'w') as f:
+with open(election_results, 'w') as f:
     for word in words:
         f.write(word + ("\n"))        
     f.close
