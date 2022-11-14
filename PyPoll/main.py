@@ -46,7 +46,7 @@ print("-" * 30)
 # -------------------------------------------
 # Specify the file to write to
 election_results = os.path.join('Analysis', 'election_results.txt')
-# Open the file using "write" mode. Specify variable to hold the text and results to be written and run for loop to write
+# Open the file using "write" mode. Specify variable to hold the text and results to be written and run for loop to write then close
 words = ["Election Results", "-" * 30, "Total Votes: " + str(len(votes_cast)), "-" * 30, "\n".join(str(item) for item in vote_results), "-" * 30, "Winner: " + str(candidate_list[winning_share]), "-" * 30]
 with open(election_results, 'w') as f:
     for word in words:
